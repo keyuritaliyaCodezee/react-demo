@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import AddUser from "./AddUser";
 import * as Actions from "../../store/actions";
+import { Table } from "react-bootstrap";
 
 function UserTable() {
     const dispatch = useDispatch()
     const { users, isUserUpdated } = useSelector(({ userStore}) => userStore)
     const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
     // console.log("users table -->", isApiUserUpdated)
-
 
     //local redux CRUD
     useEffect(() => {
@@ -61,11 +61,13 @@ function UserTable() {
         <div>
             <AddUser />
             {(users && users.length > 0) ?  (
-            <table className="table w-50 mx-auto">
-                <thead>
+            <Table className="w-50 mx-auto">
+                <thead className="">
+                    <tr>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {users && users.map((item, index) => {
@@ -84,16 +86,18 @@ function UserTable() {
                     })}
                     
                 </tbody>
-            </table>
+            </Table>
             ) : ''}
             <hr/>
             <center><h2 className="mt-5">Api List</h2></center>
                     
-            <table className="table w-50 mx-auto">
+            <Table className="table w-50 mx-auto">
                 <thead>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Actions</th>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody >
                      {apiUsers && apiUsers.map((item, index) => {
@@ -111,7 +115,7 @@ function UserTable() {
                         )
                     })}
                 </tbody>
-            </table>
+            </Table>
         </div>
     )
 }
