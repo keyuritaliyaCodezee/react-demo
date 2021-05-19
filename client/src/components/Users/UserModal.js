@@ -32,7 +32,6 @@ function MyVerticallyCenteredModal(props) {
             User Add
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
             <Formik
                 enableReinitialize={true}
                 validationSchema={ yup.object({
@@ -48,7 +47,9 @@ function MyVerticallyCenteredModal(props) {
                 }}
             >
                 {({handleSubmit,handleChange,handleBlur,values,touched,isValid,setFieldValue,errors,getFieldProps,dirty}) => (
+                
                 <Form className="w-50 mx-auto" onSubmit ={(e) => handleSubmit(e)}>
+                  <Modal.Body>
                     <div className="form-group">
                         <label>User Name<span className="text_error_color">*</span></label>
                         <input 
@@ -79,17 +80,14 @@ function MyVerticallyCenteredModal(props) {
                             />
                             <span className="text_error_color"><ErrorMessage  name="address" /></span>
                     </div>
-                    <button type="submit" disabled={ !isValid } className="btn btn-primary mt-2 d-flex mx-auto"> { (user && user.type == 'Add') ? 'Add' : 'Edit' }</button>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button type="submit" disabled={ !isValid } variant="success"> { (user && user.type == 'Add') ? 'Add' : 'Edit' }</Button>
+                      <Button onClick={props.onHide}>Close</Button>
+                    </Modal.Footer>
                 </Form>
                 )}
             </Formik>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button variant="success" >
-                Add User 
-            </Button>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
