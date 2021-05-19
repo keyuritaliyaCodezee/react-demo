@@ -12,13 +12,29 @@ const initialState = {
     type: 'Add'
 }
 
+//Add USer Modal
 function MyVerticallyCenteredModal(props) {
     const dispatch = useDispatch()
     const [user, setUser] = useState(initialState)
+    const { setUserUpdateData, isModalOpen } = useSelector(({ apiStore }) =>  apiStore)
+
+    useEffect(() => {
+      return () => {
+        setUser(initialState)
+        dispatch(Actions.setEditUserDataApi({}))
+      }
+    }, [])
+    useEffect(() => {
+      if(setUserUpdateData){
+        setUser(setUserUpdateData)
+      }
+    }, [setUserUpdateData])
+
     const handleSubmitUser = (value) => { 
-        console.log("value", value)
         dispatch(Actions.addUserDatabase(value))
         dispatch(Actions.isApiUserUpdated(true))
+        dispatch(Actions.isModalClose())
+        setUser(initialState)
     }
     return (
       <Modal
@@ -82,7 +98,7 @@ function MyVerticallyCenteredModal(props) {
                     </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button type="submit" disabled={ !isValid } variant="success"> { (user && user.type == 'Add') ? 'Add' : 'Edit' }</Button>
+                      <Button type="submit" disabled={ !isValid } variant="success"> {  'Add' }</Button>
                       <Button onClick={props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Form>
@@ -92,24 +108,28 @@ function MyVerticallyCenteredModal(props) {
     );
   }
   
+  //Main Component
   function UserModal() {
     const [modalShow, setModalShow] = React.useState(false);
-    const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
+    const { isModalOpen } = useSelector(({ apiStore }) =>  apiStore)
     const dispatch = useDispatch()
+    
     useEffect(() => {
-        if(isApiUserUpdated) {
+        if(isModalOpen) {
+            setModalShow(true)
+        }else{
             setModalShow(false)
         }
-    }, [isApiUserUpdated])
+    }, [isModalOpen])
     return (
       <>
-        <Button variant="primary" className="d-flex mx-auto" onClick={() => setModalShow(true)}>
+        <Button variant="primary" className="d-flex mx-auto" onClick={() => (setModalShow(true), dispatch(Actions.isModalOpen()))}>
           Add User To DataBase
         </Button>
   
         <MyVerticallyCenteredModal
           show={modalShow}
-          onHide={() => setModalShow(false)}
+          onHide={() => ( setModalShow(false), dispatch(Actions.isModalClose()), dispatch(Actions.setEditUserDataApi({})))}
         />
       </>
     );

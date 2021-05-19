@@ -7,15 +7,32 @@ function UserTable() {
     const dispatch = useDispatch()
     const { users, isUserUpdated } = useSelector(({ userStore}) => userStore)
     const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
-    console.log("users table -->", isApiUserUpdated)
+    // console.log("users table -->", isApiUserUpdated)
 
+
+    //local redux CRUD
     useEffect(() => {
         if(isUserUpdated) {
             dispatch(Actions.getUser())
             dispatch(Actions.isUserUpdated(false))
         }
     }, [isUserUpdated])
-   
+
+    const editUser = (data) => {
+        dispatch(Actions.editUser(data))
+        dispatch(Actions.setEditUserData(data))
+    }
+
+    const deleteUserAction = (data) => {
+        let conf = window.confirm("Are sure you want delete user?")
+        if(conf){
+            dispatch(Actions.isUserUpdated(true))
+            dispatch(Actions.deleteUser(data))
+        }
+    }
+
+
+    //Apis CRUD
     useEffect(() => {
         dispatch(Actions.getApiUser())
     }, [])
@@ -27,16 +44,9 @@ function UserTable() {
         }
     }, [isApiUserUpdated])
 
-    const editUser = (data) => {
-        dispatch(Actions.editUser(data))
-        dispatch(Actions.setEditUserData(data))
-    }
-    const deleteUserAction = (data) => {
-        let conf = window.confirm("Are sure you want delete user?")
-        if(conf){
-            dispatch(Actions.isUserUpdated(true))
-            dispatch(Actions.deleteUser(data))
-        }
+    const editUserApi = (data) => {
+        dispatch(Actions.isModalOpen())
+        dispatch(Actions.setEditUserDataApi(data))
     }
 
     const deleteUserActionApi = (data) => {
@@ -93,7 +103,7 @@ function UserTable() {
                                     <td>{item.userName}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button className="btn btn-success mr-2" type="button" >Edit</button> 
+                                        <button className="btn btn-success mr-2" type="button" onClick={() => editUserApi(item)}>Edit</button> 
                                         <button className="btn btn-danger" type="button" style={{marginLeft: 10}} onClick={() => deleteUserActionApi(item)}>Delete</button> 
                                     </td>
                                 </tr>

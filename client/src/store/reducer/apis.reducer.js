@@ -1,7 +1,9 @@
-import { GET_USER_API, API_USER_DELETE, IS_API_USER_UPDATED, USER_API_DATA_ADD } from '../types'
+import { GET_USER_API, API_USER_DELETE, IS_API_USER_UPDATED, USER_API_DATA_ADD, SET_EDIT_USER_MODAL_DATA, IS_MODAL_CLOSE, IS_MODAL_OPEN } from '../types'
 const initialState = { 
     apiUsers: [],
-    isApiUserUpdated: false
+    isApiUserUpdated: false,
+    setUserUpdateData: {},
+    isModalOpen: false
 }
 
 export const apiStore = (state= initialState, action) => 
@@ -23,6 +25,18 @@ export const apiStore = (state= initialState, action) =>
             return {
                 ...state, isApiUserUpdated: action.payload
             };
+        case SET_EDIT_USER_MODAL_DATA:
+            return {
+                ...state, setUserUpdateData: action.payload
+            };
+        case IS_MODAL_OPEN: 
+            return {
+                ...state, isModalOpen: true
+            }
+        case IS_MODAL_CLOSE: 
+            return {
+                ...state, isModalOpen: false
+            }
         default:
             return state
     }
