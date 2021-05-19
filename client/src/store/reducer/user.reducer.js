@@ -23,8 +23,8 @@ export const userStore = (state= initialState, action) =>
                 ...state, isUserUpdated: action.payload
             };
         case 'USER_UPDATE':
-            let index = state.users.findIndex((item) => item.index == action.payload.index)
-            console.log("index --->", action.payload)
+            let index = state.users.findIndex((item) => item.index === action.payload.index)
+            // console.log("index --->", action.payload)
             state.users[index] = action.payload
             return {
                 ...state, users: state.users

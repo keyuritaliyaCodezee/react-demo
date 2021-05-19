@@ -6,9 +6,9 @@ import * as Actions from "../../store/actions";
 function UserTable() {
     const dispatch = useDispatch()
     const { users, isUserUpdated } = useSelector(({ userStore}) => userStore)
-    const { apiUsers } = useSelector(({ apiStore }) =>  apiStore)
-    
-    console.log("users table -->", users)
+    const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
+    console.log("users table -->", isApiUserUpdated)
+
     useEffect(() => {
         if(isUserUpdated) {
             dispatch(Actions.getUser())
@@ -20,6 +20,13 @@ function UserTable() {
         dispatch(Actions.getApiUser())
     }, [])
 
+    useEffect(() => {
+        if(isApiUserUpdated){
+            dispatch(Actions.getApiUser())
+            dispatch(Actions.isApiUserUpdated(false))
+        }
+    }, [isApiUserUpdated])
+
     const editUser = (data) => {
         dispatch(Actions.editUser(data))
         dispatch(Actions.setEditUserData(data))
@@ -29,6 +36,14 @@ function UserTable() {
         if(conf){
             dispatch(Actions.isUserUpdated(true))
             dispatch(Actions.deleteUser(data))
+        }
+    }
+
+    const deleteUserActionApi = (data) => {
+        let conf = window.confirm("Are sure you want delete user?")
+        if(conf){
+            dispatch(Actions.isApiUserUpdated(true))
+            dispatch(Actions.deleteApiUser(data))
         }
     }
 
@@ -50,7 +65,7 @@ function UserTable() {
                                     <td>{item.userName}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button className="btn btn-success mr-2" type="button" onClick={() => editUser(item)}>Edit</button> 
+                                        <button className="btn btn-success mr-2" type="button" onClick={() => editUser(item)} style={{marginRight: 10}}>Edit</button> 
                                         <button className="btn btn-danger" type="button" onClick={() => deleteUserAction(item)}>Delete</button> 
                                     </td>
                                 </tr>
@@ -79,7 +94,7 @@ function UserTable() {
                                     <td>{item.address}</td>
                                     <td>
                                         <button className="btn btn-success mr-2" type="button" >Edit</button> 
-                                        <button className="btn btn-danger" type="button" >Delete</button> 
+                                        <button className="btn btn-danger" type="button" style={{marginLeft: 10}} onClick={() => deleteUserActionApi(item)}>Delete</button> 
                                     </td>
                                 </tr>
                             </React.Fragment>

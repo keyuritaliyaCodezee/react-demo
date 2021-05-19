@@ -1,1 +1,5 @@
 export const GET_USER_API  = 'GET_USER_API'
+
+export const API_USER_DELETE  = 'API_USER_DELETE'
+export const IS_API_USER_UPDATED = 'IS_API_USER_UPDATED'
+export const USER_API_DATA_ADD = 'USER_API_DATA_ADD'
