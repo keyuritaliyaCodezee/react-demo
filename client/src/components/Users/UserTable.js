@@ -36,7 +36,7 @@ function UserTable() {
         <div>
             <AddUser />
             {(users && users.length > 0) ?  (
-            <table className="table">
+            <table className="table w-50 mx-auto">
                 <thead>
                     <th>Name</th>
                     <th>Address</th>
@@ -78,8 +78,8 @@ function UserTable() {
                                     <td>{item.userName}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button className="btn btn-success mr-2" type="button" onClick={() => editUser(item)}>Edit</button> 
-                                        <button className="btn btn-danger" type="button" onClick={() => deleteUserAction(item)}>Delete</button> 
+                                        <button className="btn btn-success mr-2" type="button" >Edit</button> 
+                                        <button className="btn btn-danger" type="button" >Delete</button> 
                                     </td>
                                 </tr>
                             </React.Fragment>
