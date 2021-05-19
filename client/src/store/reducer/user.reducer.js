@@ -34,8 +34,8 @@ export const userStore = (state= initialState, action) =>
                 ...state, userEditData: action.payload
             };
         case 'DELETE_USER':
-            let data = state.users.filter((item) => item.userName !== action.payload.userName)
-            // console.log("delete -->", data)
+            let data = state.users.filter((item) => item.index !== action.payload.index)
+            console.log("delete -->", action.payload)
             return {
                 ...state, users: data
             };

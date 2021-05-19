@@ -7,12 +7,20 @@ export const getApiUser = () => (dispatch) => {
         axios.get('user/getUser')
         .then((result) => {
             // console.log("user --->", result.data)
-            resolve(dispatch({
-                type: GET_USER_API,
-                payload: result.data
-            }))
-            isApiUserUpdated(false)
+            const{ data } = result
+            if(data) {
+                dispatch({
+                    type: GET_USER_API,
+                    payload: data
+                })
+                isApiUserUpdated(false)
+                resolve({ message: 'success'})
+            }else{
+                isApiUserUpdated(false)
+                reject({ message: 'error'})
+            }
         }).catch((error) => {
+            console.log("get User erro", error)
             reject(error)
         })
     })
@@ -27,8 +35,14 @@ export const addUserDatabase = (data) => (dispatch) => {
             //     type: USER_API_DATA_ADD,
             //     payload: data
             // })
-            dispatch(isApiUserUpdated(false))
+            if(result) {
+                dispatch(isApiUserUpdated(false))
+                resolve({ message: 'success'})
+            }else{
+                reject({ message: 'error'})
+            }
         }).catch((error) => {
+            isApiUserUpdated(false)
             reject(error)
         })
     })
@@ -38,8 +52,13 @@ export const deleteApiUser = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         axios.post('user/deleteUser', data)
         .then((result) => {
-            isApiUserUpdated(false)
+            if(result) {
+                isApiUserUpdated(false)
+            }else{
+                reject({ message: 'error'})
+            }
         }).catch((error) => {
+            isApiUserUpdated(false)
             reject(error)
         })
     })

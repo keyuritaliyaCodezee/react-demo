@@ -11,10 +11,10 @@ export const apiStore = (state= initialState, action) =>
             return {
                 ...state, apiUsers: action.payload
             };
-        case API_USER_DELETE:
-            return {
-                ...state, apiUsers: action.payload
-            };
+        // case API_USER_DELETE:
+        //     return {
+        //         ...state, apiUsers: action.payload
+        //     };
         case USER_API_DATA_ADD:
             return {
                 ...state, apiUsers: action.payload

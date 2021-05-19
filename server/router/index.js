@@ -15,7 +15,7 @@ router.post('/addUser', (req, res) => {
             userName: req.body.userName,
             address: req.body.address
         })
-        const data = Users.save()
+        Users.save()
         res.status(200).send({ message: "user add success" })
     }catch {
         res.status(400).send({ error: 'user add unsuccess' })

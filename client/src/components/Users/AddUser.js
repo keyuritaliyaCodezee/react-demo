@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../store/actions";
-import { Form } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
 import { Formik, useFormik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
@@ -87,7 +87,7 @@ function AddUser() {
                 <Form className="w-50 mx-auto" onSubmit ={(e) => handleSubmit(e)}>
                     <div className="form-group">
                         <label>User Name<span className="text_error_color">*</span></label>
-                        <input 
+                        <FormControl 
                             type="text" 
                             className="form-control" 
                             value={values.userName} 
@@ -102,8 +102,8 @@ function AddUser() {
                     </div>
                     <div className="form-group">
                             <label>Address<span className="text_error_color">*</span></label>
-                            <textarea 
-                                type="text" 
+                            <FormControl 
+                                type="textarea" 
                                 className="form-control" 
                                 value={values.address} 
                                 // onChange={(e) => handleChange(e)} 

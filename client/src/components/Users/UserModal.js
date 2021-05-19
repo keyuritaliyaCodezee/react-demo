@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
 import { Formik, useFormik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import * as Actions from "../../store/actions";
@@ -52,7 +52,7 @@ function MyVerticallyCenteredModal(props) {
                   <Modal.Body>
                     <div className="form-group">
                         <label>User Name<span className="text_error_color">*</span></label>
-                        <input 
+                        <FormControl 
                             type="text" 
                             className="form-control" 
                             value={values.userName} 
@@ -67,8 +67,8 @@ function MyVerticallyCenteredModal(props) {
                     </div>
                     <div className="form-group">
                             <label>Address<span className="text_error_color">*</span></label>
-                            <textarea 
-                                type="text" 
+                            <FormControl 
+                                type="textarea" 
                                 className="form-control" 
                                 value={values.address} 
                                 // onChange={(e) => handleChange(e)} 
@@ -95,6 +95,7 @@ function MyVerticallyCenteredModal(props) {
   function UserModal() {
     const [modalShow, setModalShow] = React.useState(false);
     const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
+    const dispatch = useDispatch()
     useEffect(() => {
         if(isApiUserUpdated) {
             setModalShow(false)
