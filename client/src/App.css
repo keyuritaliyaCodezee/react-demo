@@ -1,0 +1,34 @@
+.block {
+  display: flex; 
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  border: 1px solid rgb(155, 84, 84);
+}
+.block1 {
+  width: 100%;
+  flex: auto;
+  justify-content: center;
+  text-align: center;
+  height: 50px;
+  border: 1px solid black;
+}
+.block2 {
+  width: 100%;
+  height: 50px;
+  flex: auto;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.block3 {
+  width: 100%;
+  height: 50px;
+  flex: auto;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.text_error_color {
+  color: red !important;
+}
