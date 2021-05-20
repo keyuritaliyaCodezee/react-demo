@@ -1,4 +1,4 @@
-import { GET_USER_API } from '../types'
+
 const initialState = { 
     users: [],
     isUserUpdated: false,
@@ -8,7 +8,7 @@ const initialState = {
 export const userStore = (state= initialState, action) => 
 {
     switch (action.type) {
-        case GET_USER_API:
+        case 'GET_USER_API':
             return {
                 ...state, users: [...state.users]
             };

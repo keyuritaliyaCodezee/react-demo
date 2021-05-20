@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,9 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}> 
-      <App />
-    </Provider>
+    <Suspense fallback={<p>Loading ...</p>}>
+      <Provider store={store}> 
+        <App />
+      </Provider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

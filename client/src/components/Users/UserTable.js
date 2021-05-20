@@ -8,7 +8,7 @@ function UserTable() {
     const dispatch = useDispatch()
     const { users, isUserUpdated } = useSelector(({ userStore}) => userStore)
     const { apiUsers, isApiUserUpdated } = useSelector(({ apiStore }) =>  apiStore)
-    // console.log("users table -->", isApiUserUpdated)
+    console.log("isApiUserUpdated -->", isApiUserUpdated)
 
     //local redux CRUD
     useEffect(() => {
@@ -47,13 +47,14 @@ function UserTable() {
     const editUserApi = (data) => {
         dispatch(Actions.isModalOpen())
         dispatch(Actions.setEditUserDataApi(data))
+        dispatch(Actions.isApiUserUpdated(true))
     }
 
     const deleteUserActionApi = (data) => {
         let conf = window.confirm("Are sure you want delete user?")
         if(conf){
-            dispatch(Actions.isApiUserUpdated(true))
             dispatch(Actions.deleteApiUser(data))
+            dispatch(Actions.isApiUserUpdated(true))
         }
     }
 

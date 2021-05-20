@@ -1,5 +1,6 @@
+import { lazy } from "react";
 import './App.css';
-import Main from "./components/Nav";
+const Main = lazy(() => import("./components/Nav"));
 
 function App() {
   return (

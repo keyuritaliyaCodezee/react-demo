@@ -4,33 +4,35 @@ const User = require('../module/user.model')
 const router = express.Router()
 
 router.get('/getUser', (req, res) => {
-    User.find({}).then((data) => {
-        res.status(200).send(data)
-    })
+    try {
+        User.find({}).then((data) => {
+            res.status(200).send(data)
+        })
+    } catch(error) {
+        res.status(500).send('Something went wrong')
+    }
 })
 
-router.post('/addUser', (req, res) => {
+router.post('/addUser', async (req, res) => {
     try {
         const Users = new User({
             userName: req.body.userName,
             address: req.body.address
         })
-        Users.save()
+        await Users.save()
         res.status(200).send({ message: "user add success" })
     }catch {
-        res.status(400).send({ error: 'user add unsuccess' })
+        res.status(500).send({ error: 'user add unsuccess' })
     }
 })
 
-router.post('/deleteUser', (req, res) => {
+router.post('/deleteUser', async (req, res) => {
     try {
-        User.find({ userName : req.body.userName}).then((result) => {
-            User.findByIdAndDelete({ _id: result[0]._id}).then(() => {
-                res.status(200).send({ message: "user delete success" })
-            })
+        await User.findByIdAndDelete(req.body._id).then(() => {
+            res.status(200).send({ message: "user delete success" })
         })
     }catch {
-        res.status(400).send({ error: 'user delete unsuccess' })
+        res.status(500).send({ error: 'user delete unsuccess' })
     }
 })
 

@@ -1,5 +1,12 @@
 import axios from "axios"
-import { GET_USER_API, API_USER_DELETE, IS_API_USER_UPDATED, USER_API_DATA_ADD, SET_EDIT_USER_MODAL_DATA, IS_MODAL_OPEN, IS_MODAL_CLOSE } from '../types'
+
+export const GET_USER_API  = 'GET_USER_API'
+export const API_USER_DELETE  = 'API_USER_DELETE'
+export const IS_API_USER_UPDATED = 'IS_API_USER_UPDATED'
+export const USER_API_DATA_ADD = 'USER_API_DATA_ADD'
+export const SET_EDIT_USER_MODAL_DATA = 'SET_EDIT_USER_MODAL_DATA'
+export const IS_MODAL_OPEN = 'IS_MODAL_OPEN'
+export const IS_MODAL_CLOSE = 'IS_MODAL_CLOSE'
 
 axios.defaults.baseURL = 'http://localhost:8080/api/'
 export const getApiUser = () => (dispatch) => {
@@ -36,7 +43,7 @@ export const addUserDatabase = (data) => (dispatch) => {
             //     payload: data
             // })
             if(result) {
-                dispatch(isApiUserUpdated(false))
+                dispatch(isApiUserUpdated(true))
                 resolve({ message: 'success'})
             }else{
                 reject({ message: 'error'})
@@ -58,7 +65,7 @@ export const editUserDatabase = (data) => (dispatch) => {
             //     payload: data
             // })
             if(result) {
-                dispatch(isApiUserUpdated(false))
+                dispatch(isApiUserUpdated(true))
                 resolve({ message: 'success'})
             }else{
                 reject({ message: 'error'})
@@ -75,7 +82,7 @@ export const deleteApiUser = (data) => (dispatch) => {
         axios.post('user/deleteUser', data)
         .then((result) => {
             if(result) {
-                isApiUserUpdated(false)
+                isApiUserUpdated(true)
             }else{
                 reject({ message: 'error'})
             }

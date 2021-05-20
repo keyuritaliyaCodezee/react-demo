@@ -5,6 +5,7 @@ import { Formik, useFormik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import * as Actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import appConstamnt from '../appConfigration'
 
 const initialState = {
     userName: '',
@@ -98,7 +99,7 @@ function MyVerticallyCenteredModal(props) {
                     </div>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button type="submit" disabled={ !isValid } variant="success"> {  'Add' }</Button>
+                      <Button type="submit" disabled={ !isValid } variant="success"> {appConstamnt.add} </Button>
                       <Button onClick={props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Form>

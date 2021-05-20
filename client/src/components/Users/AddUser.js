@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../store/actions";
 import { Form, FormControl } from "react-bootstrap";
 import { Formik, useFormik, ErrorMessage } from 'formik'
+import appConstamnt from "../appConfigration";
 import * as yup from 'yup'
 
 const initialState = {
@@ -115,7 +116,7 @@ function AddUser() {
                             />
                             <span className="text_error_color"><ErrorMessage  name="address" /></span>
                     </div>
-                    <button type="submit" disabled={ !isValid } className="btn btn-primary mt-2 d-flex mx-auto"> { (user && user.type == 'Add') ? 'Add' : 'Edit' }</button>
+                    <button type="submit" disabled={ !isValid } className="btn btn-primary mt-2 d-flex mx-auto"> { (user && user.type == 'Add') ? appConstamnt.add : appConstamnt.edit }</button>
                 </Form>
                 )}
             </Formik>
