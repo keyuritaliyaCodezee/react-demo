@@ -1,4 +1,5 @@
 import axios from "axios"
+// import appConstamnt from '../../components/appConfigration'
 
 export const GET_USER_API  = 'GET_USER_API'
 export const API_USER_DELETE  = 'API_USER_DELETE'
@@ -8,7 +9,7 @@ export const SET_EDIT_USER_MODAL_DATA = 'SET_EDIT_USER_MODAL_DATA'
 export const IS_MODAL_OPEN = 'IS_MODAL_OPEN'
 export const IS_MODAL_CLOSE = 'IS_MODAL_CLOSE'
 
-axios.defaults.baseURL = 'http://localhost:8080/api/'
+axios.defaults.baseURL = 'http://localhost:8000/api/'
 export const getApiUser = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         axios.get('user/getUser')

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const connect = mongoose.connect('mongodb+srv://admin:admin@cluster0.bty0d.mongodb.net/firstApp?retryWrites=true&w=majority', {
+const URL = process.env.ATLAS_URL
+
+const connect = mongoose.connect(URL , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: true,
